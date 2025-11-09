@@ -1,0 +1,15 @@
+<VirtualHost *:80>
+
+    ServerName cs.local
+    DocumentRoot "${docroot-cs}/contact_manager/public"
+    <Directory "${docroot-cs}/contact_manager/public">
+        AllowOverride All
+        Require all granted
+    </Directory>
+    
+    Alias /api "${docroot-cs}/contact_manager/api"
+    <Directory "${docroot-cs}/contact_manager/api">
+        Require all granted
+    </Directory>
+
+</VirtualHost>

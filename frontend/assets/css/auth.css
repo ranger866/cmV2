@@ -1,0 +1,73 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #74EBD5 0%, #9FACE6 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    padding: 2rem 2.5rem;
+    width: 100%;
+    max-width: 420px;
+    transition: all 0.3s ease;
+}
+
+.auth-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+h4 {
+    font-weight: 600;
+    color: #333;
+}
+
+.form-control {
+    border-radius: 12px;
+    padding: 10px 14px;
+}
+
+.btn {
+    border-radius: 12px;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background-color: #007BFF;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-success {
+    background-color: #28A745;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #1e7e34;
+}
+
+.toggle-btn {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+#alertBox {
+    border-radius: 10px;
+}
+
+@media (max-width: 480px) {
+    .auth-card {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+}

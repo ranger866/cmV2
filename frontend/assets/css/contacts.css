@@ -1,0 +1,50 @@
+.icon {
+    width: 50%;
+    align-self: center;
+}
+
+.sf {
+    width: 65rem;
+}
+
+.search {
+    margin: 0 0 0 15px;
+}
+
+.add {
+    margin: 0 15px 0 0;
+}
+
+.card {
+    gap: 0 1.5rem;
+}
+
+.card-action {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 10;
+}
+
+.card-action button {
+    margin-left: 4px;
+}
+
+.card.dark-mode {
+    background-color: var(--background-dark-mode);
+}
+
+.contact-wrap {
+    max-height: calc(100vh - 180px);
+    overflow-y: auto;
+    padding-right: 6px;
+}
+
+#contactArea {
+    margin: 0;
+}
+
+.contact-wrap::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 4px;
+}
