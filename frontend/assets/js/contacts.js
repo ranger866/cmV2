@@ -1,5 +1,3 @@
-var currentPage = 1;
-var perPage = 8;
 var currentQuery = '';
 var filterGender = '';
 var filterGroup = '';
@@ -13,22 +11,21 @@ $(function(){
         clearTimeout(typingTimer);
         var q = $(this).val().trim();
         typingTimer = setTimeout(function(){ 
-            currentQuery = q; 
-            currentPage = 1; 
-            loadContacts(currentPage, currentQuery); 
+            currentQuery = q;  
+            loadContacts(currentQuery); 
         }, 300);
     });
 
     $('#filterGender').on('change', function(){
         filterGender = $(this).val();
-        currentPage = 1;
-        loadContacts(currentPage, currentQuery);
+        
+        loadContacts(currentQuery);
     });
 
     $('#filterGroup').on('change', function(){
         filterGroup = $(this).val();
-        currentPage = 1;
-        loadContacts(currentPage, currentQuery);
+        
+        loadContacts(currentQuery);
     });
 
     $('#addBtn').on('click', function(){ 
@@ -66,7 +63,7 @@ $(function(){
                 if (res.success) { 
                     $('#contactModal').modal('hide'); 
                     showAlert('Contact added','success'); 
-                    loadContacts(currentPage,currentQuery); 
+                    loadContacts(currentQuery); 
                 } else { 
                     $('#formErrors').text((res.errors||[]).join(', ')||res.message||'Failed'); 
                 }
@@ -82,7 +79,7 @@ $(function(){
                     if (res.success) { 
                         $('#contactModal').modal('hide'); 
                         showAlert('Contact updated','success'); 
-                        loadContacts(currentPage,currentQuery); 
+                        loadContacts(currentQuery); 
                     } else $('#formErrors').text((res.errors||[]).join(', ')||res.message||'Failed'); 
                 }, 
                 error: function(){ 
@@ -93,11 +90,9 @@ $(function(){
     });
 });
 
-function loadContacts(page,q){
-    page = page||1; q = q||'';
-    $.get('../api/contacts.php', { 
-        page: page, 
-        perPage: perPage, 
+function loadContacts(q){
+    q = q||'';
+    $.get('../api/contacts.php', {  
         q: q,
         gender: filterGender,
         group: filterGroup,
@@ -105,7 +100,6 @@ function loadContacts(page,q){
     }, function(res){
         if (!res.success) { showAlert('Failed to load contacts','danger'); if (res.message && res.message==='Unauthorized') window.location.href='auth.php'; return; }
         renderCard(res.data);
-        renderPagination(res.meta);
     }, 'json').fail(function(){ showAlert('Failed to load contacts','danger'); });
 }
 
@@ -127,8 +121,8 @@ function renderCard(data){
         card_contact +=
         '<div class="col-md-3 mb-3">' +
             '<div class="card shadow-sm border-0 p-4 h-100">' +
-                '<div class="card shadow border-0 p-2 text-center mb-4 position-relative">' + 
-                    '<img class="icon" src="/img/'+ gender +'.png">' +
+                '<div class="card shadow border-0 p-3 text-center mb-4 position-relative">' + 
+                    '<img class="icon" src="/img/'+ (gender === "" ? "user" : gender ) +'.png">' +
                     '<div class="card-action">' +
                         '<button class="btn btn-sm btn-outline-primary mb-2 btn-edit" data-id="' + r.id + '"><i class="bi bi-pencil"></i></button>' +
                         '<button class="btn btn-sm btn-outline-danger mb-2 btn-del" data-id="' + r.id + '"><i class="bi bi-trash"></i></button>' +
@@ -149,27 +143,6 @@ function renderCard(data){
     $c.html(card_contact);
     $c.find('.btn-edit').off('click').on('click', function(){ openEdit($(this).data('id')); });
     $c.find('.btn-del').off('click').on('click', function(){ deleteContact($(this).data('id')); });
-}
-
-function renderPagination(meta){
-    var $p = $('#pagination');
-    if (!meta) { 
-        $p.html(''); 
-        return; 
-    }
-    var page = meta.page;
-    var pages = meta.pages;
-    if (pages<=1) { 
-        $p.html(''); 
-        return; 
-    }
-    var html = '<ul class="pagination">';
-    if (page>1) html += '<li class="page-item"><a class="page-link" href="#" data-page="'+(page-1)+'">Prev</a></li>';
-    for (var i=1;i<=pages;i++) html += '<li class="page-item '+(i===page?'active':'')+'"><a class="page-link" href="#" data-page="'+i+'">'+i+'</a></li>';
-    if (page<pages) html += '<li class="page-item"><a class="page-link" href="#" data-page="'+(page+1)+'">Next</a></li>';
-    html += '</ul>'; 
-    $p.html(html);
-    $p.find('a[data-page]').off('click').on('click', function(e){ e.preventDefault(); var p=$(this).data('page'); currentPage=p; loadContacts(p,currentQuery); });
 }
 
 function openEdit(id){
@@ -197,7 +170,7 @@ function deleteContact(id){
         data: { id: id }, 
         dataType: 'json', 
         success: function(res){ 
-            if (res.success) { showAlert('Deleted','success'); loadContacts(currentPage,currentQuery); } 
+            if (res.success) { showAlert('Deleted','success'); loadContacts(currentQuery); } 
             else showAlert(res.message||'Delete failed','danger'); 
         }, 
         error: function(){ showAlert('Server error','danger'); } 

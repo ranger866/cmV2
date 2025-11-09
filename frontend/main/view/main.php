@@ -30,12 +30,12 @@ $user = $_SESSION['username'] ?? 'Guest';
     <!-- Content -->
     <div class="flex-grow-1">
       <div class="topbar p-3 d-flex justify-content-between align-items-center border-bottom">
-        <div class="fw-bold fs-5" id="pageTitle">Dashboard</div>
+        <div class="fw-bold fs-4" id="pageTitle">Dashboard</div>
         <div>
           <button id="toggleDarkMode" class="btn btn-outline-secondary rounded-circle me-2">
             <i class="bi bi-moon-fill"></i>
           </button>
-          <span class="me-3"><?= htmlspecialchars($user) ?></span>
+          <span class="me-3 fs-5"><?= htmlspecialchars($user) ?></span>
           <a href="/view/logout.php" class="btn btn-outline-danger btn-sm">Logout</a>
         </div>
       </div>

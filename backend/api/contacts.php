@@ -35,11 +35,7 @@ try {
                     echo json_encode(['success' => true, 'data' => $row]);
                 }
                 exit;
-            }
-
-            $page = max(1, (int)($_GET['page'] ?? 1));
-            $perPage = max(1, min(100, (int)($_GET['perPage'] ?? 8)));
-            $offset = ($page - 1) * $perPage;
+            };
 
             $q = trim($_GET['q'] ?? '');
             $gender = trim($_GET['gender'] ?? '');
@@ -66,7 +62,7 @@ try {
             $countStmt->execute($params);
             $total = (int)$countStmt->fetchColumn();
 
-            $sql = "SELECT * FROM contacts $where ORDER BY created_at DESC LIMIT $offset, $perPage";
+            $sql = "SELECT * FROM contacts $where ORDER BY created_at DESC";
             $stmt = $pdo->prepare($sql);
             $stmt->execute($params);
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -75,10 +71,7 @@ try {
                 'success' => true,
                 'data' => $rows,
                 'meta' => [
-                    'page' => $page,
-                    'perPage' => $perPage,
                     'total' => $total,
-                    'pages' => $perPage > 0 ? ceil($total / $perPage) : 0
                 ]
             ]);
             exit;
