@@ -1,10 +1,10 @@
 <link rel="stylesheet" href="/css/contacts.css">
 <script src="/js/contacts.js"></script>
 
-<div class="container-fluid">
+<div class="container-fluid bg-white rounded-3 p-3">
   <div class="d-flex justify-content-between align-items-center mb-3">
-    <h3 class="fw-semibold mb-0">Daftar Contacts</h3>
-    <div class="d-flex flex-row align-items-center card shadow-sm border-0 p-2 h100 sf">
+    <h3 class="fw-semibold mb-0 p-3">Daftar Contacts</h3>
+    <div class="d-flex flex-row align-items-center card shadow border-0 p-3 sf me-3">
       <input class="form-control search" type="text" name="search" id="search" placeholder="Cari Kontak">
       <select name="filterGender" id="filterGender" class="form-select">
         <option value="">Semua Gender</option>

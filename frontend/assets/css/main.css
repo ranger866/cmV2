@@ -37,7 +37,6 @@ html, body {
     width: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden;
 }
 
 body {
@@ -105,7 +104,6 @@ body {
     flex-direction: column;
     background-color: var(--background-light-mode);
     height: 100vh;
-    overflow: hidden;
 }
 
 /* === TOPBAR === */
@@ -128,6 +126,7 @@ body {
 #content-area {
     flex-grow: 1;
     padding: 2rem;
+    overflow: auto;
 }
 
 /* === TABLE AREA === */

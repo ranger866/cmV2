@@ -22,8 +22,9 @@ $user = $_SESSION['username'] ?? 'Guest';
     <div class="sidebar p-3 border-end">
       <h4 class="text-center mb-4 side-text">📇 Manager</h4>
       <ul class="nav flex-column" id="menuLinks">
-        <li class="nav-item"><a href="#" data-page="dashboard" class="nav-link active"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
+        <li class="nav-item"><a href="#" data-page="dashboard" class="nav-link"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
         <li class="nav-item"><a href="#" data-page="contacts" class="nav-link"><i class="bi bi-person-lines-fill me-2"></i>Contacts</a></li>
+        <li class="nav-item"><a href="#" data-page="export" class="nav-link"><i class="bi bi-person-circle me-2"></i>Export</a></li>
       </ul>
     </div>
 
@@ -32,7 +33,7 @@ $user = $_SESSION['username'] ?? 'Guest';
       <div class="topbar p-3 d-flex justify-content-between align-items-center border-bottom">
         <div class="fw-bold fs-4" id="pageTitle">Dashboard</div>
         <div>
-          <button id="toggleDarkMode" class="btn btn-outline-secondary rounded-circle me-2">
+          <button id="toggleDarkMode" class="btn btn-outline-secondary rounded-circle me-2" disabled>
             <i class="bi bi-moon-fill"></i>
           </button>
           <span class="me-3 fs-5"><?= htmlspecialchars($user) ?></span>

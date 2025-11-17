@@ -1,10 +1,10 @@
 <script src="/js/dashboard.js"></script>
 
-<div class="container-fluid">
+<div class="container-fluid bg-white rounded-3 ps-5 pe-5 pb-5 pt-4">
   <div class="row">
     <div class="col-md-12 mb-4">
       <h2 class="fw-semibold">Welcome to Contact Manager</h2>
-      <p>Manage your contacts easily — all in one place.</p>
+      <p class="fs-5">Manage your contacts easily — all in one place.</p>
     </div>
   </div>
   <div class="row g-3">

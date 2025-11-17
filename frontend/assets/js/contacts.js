@@ -120,7 +120,7 @@ function renderCard(data){
         var group = escapeHtml(r.group_contacts);
         card_contact +=
         '<div class="col-md-3 mb-3">' +
-            '<div class="card shadow-sm border-0 p-4 h-100">' +
+            '<div class="card shadow border-0 p-4 h-100">' +
                 '<div class="card shadow border-0 p-3 text-center mb-4 position-relative">' + 
                     '<img class="icon" src="/img/'+ (gender === "" ? "user" : gender ) +'.png">' +
                     '<div class="card-action">' +
