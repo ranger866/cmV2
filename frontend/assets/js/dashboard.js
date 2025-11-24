@@ -6,7 +6,7 @@ $(function(){
     var laki_laki = document.getElementById('laki-laki');
     var perempuan = document.getElementById('perempuan')
 
-    $.get('../api/contacts.php',function(res){
+    $.get('/api/contacts.php',function(res){
         if (!res.success) { showAlert('Failed to load contacts','danger'); 
         if (res.message && res.message==='Unauthorized') window.location.href='auth.php'; return; }
         data = res.data;

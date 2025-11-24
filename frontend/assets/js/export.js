@@ -51,25 +51,32 @@ function exportPDF(data) {
         return;
     }
 
+    const iframe = document.getElementById("pdfFrame");
+    const doc = iframe.contentDocument || iframe.contentWindow.document;
+
     let html = `
-        <h2 style="text-align:center;margin-bottom:20px;">Contacts List</h2>
-        <table border="1" cellspacing="0" cellpadding="8" style="width:100%; border-collapse:collapse; font-size:14px;">
-            <thead>
-                <tr style="background:#f1f1f1;">
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Gender</th>
-                    <th>Group</th>
-                    <th>Address</th>
-                </tr>
-            </thead>
-            <tbody>
+        <div style="padding:30px; font-size:14px; font-family:Arial, sans-serif;">
+            <h2 style="text-align:center; margin-bottom:25px;">Contacts List</h2>
+
+            <div style="display:flex; justify-content:center;">
+                <table border="1" cellspacing="0" cellpadding="10"
+                    style="width:80%; max-width:900px; background:#ffffff; border-collapse:collapse;">
+                    <thead>
+                        <tr style="background:#e0e0e0; text-align:center; font-weight:bold;">
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Gender</th>
+                            <th>Group</th>
+                            <th>Address</th>
+                        </tr>
+                    </thead>
+                    <tbody>
     `;
 
     data.forEach(r => {
         html += `
-            <tr>
+            <tr style="background:#ffffff;">
                 <td>${r.name}</td>
                 <td>${r.email}</td>
                 <td>${r.phone}</td>
@@ -80,29 +87,29 @@ function exportPDF(data) {
         `;
     });
 
-    html += `</tbody></table>`;
+    html += `
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    `;
 
-    const container = document.getElementById("pdfContainer");
+    // isi iframe
+    doc.open();
+    doc.write(html);
+    doc.close();
 
-    if (!container) {
-        console.error("pdfContainer tidak ditemukan!");
-        return;
-    }
-
-    container.innerHTML = html;
-
-    const opt = {
-        margin: 10,
-        filename: 'contacts.pdf',
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-    };
-
-    setTimeout(() => {
-        html2pdf().from(container).set(opt).save();
-    }, 200);
+    // generate PDF dari iframe.body
+    html2pdf()
+        .from(doc.body)
+        .set({
+            margin: 10,
+            filename: "contacts.pdf",
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
+        })
+        .save();
 }
-
 
 function exportDOCX(data) {
     if (!data || data.length === 0) {

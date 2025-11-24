@@ -25,7 +25,7 @@ try {
         case 'GET':
             if (isset($_GET['id'])) {
                 $id = (int)$_GET['id'];
-                $stmt = $pdo->prepare("SELECT * FROM contacts WHERE id = :id AND user_id = :uid LIMIT 1");
+                $stmt = $pdo->prepare("SELECT * FROM contacts WHERE id = :id AND user_id = :uid");
                 $stmt->execute(['id' => $id, 'uid' => $_SESSION['user_id']]);
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 if (!$row) {

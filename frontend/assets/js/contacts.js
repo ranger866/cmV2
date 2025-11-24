@@ -59,7 +59,7 @@ $(function(){
         }
 
         if (!id) {
-            $.post('../api/contacts.php', payload, function(res){
+            $.post('/api/contacts.php', payload, function(res){
                 if (res.success) { 
                     $('#contactModal').modal('hide'); 
                     showAlert('Contact added','success'); 
@@ -71,7 +71,7 @@ $(function(){
         } else {
             payload.id = id;
             $.ajax({ 
-                url: '../api/contacts.php', 
+                url: '/api/contacts.php', 
                 type: 'PUT', 
                 data: payload, 
                 dataType: 'json', 
@@ -92,7 +92,7 @@ $(function(){
 
 function loadContacts(q){
     q = q||'';
-    $.get('../api/contacts.php', {  
+    $.get('/api/contacts.php', {  
         q: q,
         gender: filterGender,
         group: filterGroup,
@@ -146,7 +146,7 @@ function renderCard(data){
 }
 
 function openEdit(id){
-    $.get('../api/contacts.php', { id: id }, function(res){ 
+    $.get('/api/contacts.php', { id: id }, function(res){ 
         if (!res.success) { showAlert('Failed to fetch','danger'); return; } 
         var d=res.data; 
         if (!d) { showAlert('Not found','danger'); return; } 
@@ -165,7 +165,7 @@ function openEdit(id){
 function deleteContact(id){ 
     if (!confirm('Delete this contact?')) return; 
     $.ajax({ 
-        url: '../api/contacts.php', 
+        url: '/api/contacts.php', 
         type: 'DELETE', 
         data: { id: id }, 
         dataType: 'json', 
